@@ -44,13 +44,11 @@ fn main() {
         println!("Balance: {}$", bal);
 
         fn win(s1: &'static str, s2: &'static str, s3: &'static str, int_bet: i32) -> i32 {
-            // Count occurrences of each symbol
             let mut counts = std::collections::HashMap::new();
             *counts.entry(s1).or_insert(0) += 1;
             *counts.entry(s2).or_insert(0) += 1;
             *counts.entry(s3).or_insert(0) += 1;
 
-            // Case 1: All three symbols are the same
             if counts.values().any(|&count| count == 3) {
                 let symbol = counts.iter().find(|&(_, &count)| count == 3).unwrap().0;
                 match *symbol {
@@ -66,7 +64,6 @@ fn main() {
                     _ => int_bet * 3,
                 }
             }
-            // Case 2: Two symbols are the same
             else if counts.values().any(|&count| count == 2) {
                 let symbol = counts.iter().find(|&(_, &count)| count == 2).unwrap().0;
                 match *symbol {
@@ -82,7 +79,6 @@ fn main() {
                     _ => int_bet * 2,
                 }
             }
-            // Case 3: No matching symbols
             else {
                 0
             }
